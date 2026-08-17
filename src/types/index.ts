@@ -68,6 +68,11 @@ export interface IUser {
   avatar?: string;
 }
 
+// --- Theme Types ---
+
+/** Supported theme modes */
+export type Theme = 'dark' | 'light';
+
 // --- UI Types ---
 
 /** Container component size variants */

@@ -1,20 +1,26 @@
 @import "tailwindcss";
 
 /* ============================================================================
-   Vocai — Design System & Color Palette
+   Picword — Design System & Color Palette
    
-   Color Palette:
+   Dark Palette:
    ─────────────────────────────────────
    Background:    #06060f (deep space)    → #0c0c1d (surface)   → #141428 (elevated)
-   Primary:       #7c3aed (violet-600)    → #6d28d9 (violet-700)
+   Primary:       #7c3aed (violet-600)    → #8b5cf6 (violet-500)
    Accent:        #06b6d4 (cyan-500)      → #22d3ee (cyan-400)
-   Secondary:     #8b5cf6 (violet-500)    → #a78bfa (violet-400)
    Success:       #10b981 (emerald-500)
    Warning:       #f59e0b (amber-500)
    Error:         #ef4444 (red-500)
    Text Primary:  #f0f0f8
    Text Muted:    #9290b4
    Border:        #1e1e3a
+   
+   Light Palette:
+   ─────────────────────────────────────
+   Background:    #f8f7ff              → #efeefc (surface)   → #ffffff (elevated)
+   Text Primary:  #1a1a2e
+   Text Muted:    #6b6890
+   Border:        #e2e0f0
    ============================================================================ */
 
 /* --- Tailwind 4 Theme Tokens --- */
@@ -36,8 +42,9 @@
   --font-heading: var(--font-space-grotesk);
 }
 
-/* --- Color Palette Variables --- */
-:root {
+/* ── Dark Theme (default) ────────────────────────────────────────────────── */
+:root,
+:root.dark {
   /* Backgrounds */
   --background: #06060f;
   --surface: #0c0c1d;
@@ -71,6 +78,53 @@
   --glass-bg: rgba(12, 12, 29, 0.6);
   --glass-border: rgba(124, 58, 237, 0.15);
   --glass-blur: 16px;
+
+  /* Hover overlay */
+  --hover-overlay: rgba(255, 255, 255, 0.05);
+
+  color-scheme: dark;
+}
+
+/* ── Light Theme ─────────────────────────────────────────────────────────── */
+:root.light {
+  /* Backgrounds */
+  --background: #f8f7ff;
+  --surface: #efeefc;
+  --elevated: #ffffff;
+
+  /* Brand Colors — slightly deeper for contrast on light */
+  --primary: #6d28d9;
+  --primary-light: #7c3aed;
+  --accent: #0891b2;
+  --accent-light: #06b6d4;
+
+  /* Feedback */
+  --success: #059669;
+  --warning: #d97706;
+  --error: #dc2626;
+
+  /* Text */
+  --foreground: #1a1a2e;
+  --muted: #6b6890;
+
+  /* Borders */
+  --border-color: #e2e0f0;
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(135deg, #6d28d9 0%, #0891b2 50%, #059669 100%);
+  --gradient-glow: linear-gradient(135deg, #6d28d9 0%, #06b6d4 100%);
+  --gradient-surface: linear-gradient(180deg, #efeefc 0%, #f8f7ff 100%);
+  --gradient-card: linear-gradient(145deg, rgba(239, 238, 252, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
+
+  /* Glass */
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(109, 40, 217, 0.12);
+  --glass-blur: 16px;
+
+  /* Hover overlay */
+  --hover-overlay: rgba(0, 0, 0, 0.04);
+
+  color-scheme: light;
 }
 
 /* --- Base Styles --- */
@@ -84,6 +138,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
@@ -93,6 +148,7 @@ body {
   line-height: 1.6;
   min-height: 100dvh;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* --- Glassmorphism Utility --- */
@@ -102,14 +158,16 @@ body {
   -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--glass-border);
   border-radius: 16px;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .glass-sm {
-  background: rgba(12, 12, 29, 0.4);
+  background: var(--glass-bg);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(124, 58, 237, 0.1);
+  border: 1px solid var(--glass-border);
   border-radius: 12px;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 /* --- Gradient Text Utility --- */
@@ -169,6 +227,18 @@ body {
     0 0 80px rgba(6, 182, 212, 0.15);
 }
 
+:root.light .glow-effect {
+  box-shadow:
+    0 0 20px rgba(109, 40, 217, 0.08),
+    0 0 40px rgba(8, 145, 178, 0.05);
+}
+
+:root.light .glow-effect:hover {
+  box-shadow:
+    0 0 30px rgba(109, 40, 217, 0.14),
+    0 0 60px rgba(8, 145, 178, 0.08);
+}
+
 /* --- Subtle Fade-In Animation --- */
 @keyframes fade-in-up {
   from {
@@ -216,7 +286,7 @@ body {
 /* --- Selection Color --- */
 ::selection {
   background: rgba(124, 58, 237, 0.3);
-  color: #f0f0f8;
+  color: var(--foreground);
 }
 
 /* --- Scrollbar Styling --- */
@@ -241,4 +311,14 @@ body {
 .focus-ring:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
+}
+
+/* --- Theme-Aware Hover Background --- */
+.hover-bg:hover {
+  background: var(--hover-overlay);
+}
+
+/* --- Theme-Aware Subtle Background (static, not hover) --- */
+.subtle-bg {
+  background: var(--hover-overlay);
 }

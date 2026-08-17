@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import type { IUser } from "@/types";
 
 // ── Mock categories (will come from API later) ──────────────────────────────
@@ -50,8 +51,8 @@ export default function Navbar() {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border"
-          : "bg-transparent"
+          ? "bg-background/90 backdrop-blur-xl border-b border-border shadow-sm"
+          : "bg-background backdrop-blur-md border-b border-border/40"
       }`}
     >
       <Container size="xl">
@@ -73,7 +74,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-1">
             <Link
               href="/"
-              className="px-4 py-2 text-sm text-muted hover:text-foreground transition-colors rounded-lg hover:bg-white/5"
+              className="px-4 py-2 text-sm text-muted hover:text-foreground transition-colors rounded-lg hover-bg"
             >
               Home
             </Link>
@@ -86,7 +87,7 @@ export default function Navbar() {
               onMouseLeave={handleCategoryLeave}
             >
               <button
-                className="flex items-center gap-1.5 px-4 py-2 text-sm text-muted hover:text-foreground transition-colors rounded-lg hover:bg-white/5"
+                className="flex items-center gap-1.5 px-4 py-2 text-sm text-muted hover:text-foreground transition-colors rounded-lg hover-bg"
                 onClick={() => setIsCategoryOpen((prev) => !prev)}
               >
                 Categories
@@ -110,13 +111,13 @@ export default function Navbar() {
 
               {/* ── Category Mega Menu ──────────────────────────────── */}
               <div
-                className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-250 bg-background ${
+                className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-250 ${
                   isCategoryOpen
                     ? "opacity-100 translate-y-0 pointer-events-auto"
                     : "opacity-0 -translate-y-2 pointer-events-none"
                 }`}
               >
-                <div className="w-[540px] glass rounded-2xl border border-border p-5 shadow-2xl shadow-primary/5">
+                <div className="w-[540px] bg-surface rounded-2xl border border-border p-5 shadow-2xl shadow-primary/10 backdrop-blur-xl">
                   {/* Header */}
                   <div className="flex items-center justify-between mb-4 px-1">
                     <h3
@@ -139,7 +140,7 @@ export default function Navbar() {
                       <Link
                         key={cat.slug}
                         href={`/category/${cat.slug}`}
-                        className="group/item flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-all duration-200"
+                        className="group/item flex items-start gap-3 p-3 rounded-xl hover-bg transition-all duration-200"
                         onClick={() => setIsCategoryOpen(false)}
                       >
                         <span className="text-2xl mt-0.5 group-hover/item:scale-110 transition-transform duration-200">
@@ -150,7 +151,7 @@ export default function Navbar() {
                             <span className="text-sm font-medium text-foreground group-hover/item:text-accent-light transition-colors">
                               {cat.name}
                             </span>
-                            <span className="text-[10px] text-muted bg-white/5 px-1.5 py-0.5 rounded-full">
+                            <span className="text-[10px] text-muted subtle-bg px-1.5 py-0.5 rounded-full">
                               {cat.wordCount}
                             </span>
                           </div>
@@ -167,7 +168,7 @@ export default function Navbar() {
 
             <Link
               href="/dashboard"
-              className="px-4 py-2 text-sm text-muted hover:text-foreground transition-colors rounded-lg hover:bg-white/5"
+              className="px-4 py-2 text-sm text-muted hover:text-foreground transition-colors rounded-lg hover-bg"
             >
               Dashboard
             </Link>
@@ -175,6 +176,7 @@ export default function Navbar() {
 
           {/* ── Auth Section (Desktop) ──────────────────────────────── */}
           <div className="hidden md:flex items-center gap-3">
+            <ThemeToggle />
             {user ? (
               <div className="flex items-center gap-3">
                 <span className="text-sm text-muted">{user.name}</span>
@@ -186,7 +188,7 @@ export default function Navbar() {
               <>
                 <Link
                   href="/login"
-                  className="px-4 py-2 text-sm text-muted hover:text-foreground transition-colors rounded-lg hover:bg-white/5"
+                  className="px-4 py-2 text-sm text-muted hover:text-foreground transition-colors rounded-lg hover-bg"
                 >
                   Log in
                 </Link>
@@ -202,7 +204,7 @@ export default function Navbar() {
 
           {/* ── Mobile Hamburger ────────────────────────────────────── */}
           <button
-            className="md:hidden flex flex-col items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors"
+            className="md:hidden flex flex-col items-center justify-center w-10 h-10 rounded-lg hover-bg transition-colors"
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
             aria-label="Toggle menu"
           >
@@ -226,12 +228,12 @@ export default function Navbar() {
           isMobileMenuOpen ? "max-h-[80vh] border-b border-border" : "max-h-0"
         }`}
       >
-        <div className="bg-background/95 backdrop-blur-xl">
+        <div className="bg-surface border-t border-border backdrop-blur-xl">
           <Container size="xl" className="py-4">
             <div className="flex flex-col gap-1">
               <Link
                 href="/"
-                className="px-4 py-3 text-sm text-muted hover:text-foreground hover:bg-white/5 rounded-xl transition-colors"
+                className="px-4 py-3 text-sm text-muted hover:text-foreground hover-bg rounded-xl transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Home
@@ -239,7 +241,7 @@ export default function Navbar() {
 
               {/* Mobile categories accordion */}
               <button
-                className="flex items-center justify-between px-4 py-3 text-sm text-muted hover:text-foreground hover:bg-white/5 rounded-xl transition-colors"
+                className="flex items-center justify-between px-4 py-3 text-sm text-muted hover:text-foreground hover-bg rounded-xl transition-colors"
                 onClick={() => setIsCategoryOpen((prev) => !prev)}
               >
                 Categories
@@ -272,7 +274,7 @@ export default function Navbar() {
                     <Link
                       key={cat.slug}
                       href={`/category/${cat.slug}`}
-                      className="flex items-center gap-2 px-3 py-2.5 text-sm text-muted hover:text-foreground hover:bg-white/5 rounded-lg transition-colors"
+                      className="flex items-center gap-2 px-3 py-2.5 text-sm text-muted hover:text-foreground hover-bg rounded-lg transition-colors"
                       onClick={() => {
                         setIsCategoryOpen(false);
                         setIsMobileMenuOpen(false);
@@ -287,14 +289,18 @@ export default function Navbar() {
 
               <Link
                 href="/dashboard"
-                className="px-4 py-3 text-sm text-muted hover:text-foreground hover:bg-white/5 rounded-xl transition-colors"
+                className="px-4 py-3 text-sm text-muted hover:text-foreground hover-bg rounded-xl transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Dashboard
               </Link>
 
-              {/* Mobile auth */}
-              <div className="border-t border-border mt-2 pt-3 flex flex-col gap-2 px-2">
+              {/* Mobile theme + auth */}
+              <div className="border-t border-border mt-2 pt-3 flex flex-col gap-3 px-2">
+                <div className="flex items-center justify-between px-2 py-1">
+                  <span className="text-sm text-muted">Theme</span>
+                  <ThemeToggle />
+                </div>
                 {user ? (
                   <div className="flex items-center gap-3 px-2 py-2">
                     <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-sm font-semibold text-white">
@@ -309,7 +315,7 @@ export default function Navbar() {
                   <div className="flex gap-2">
                     <Link
                       href="/login"
-                      className="flex-1 text-center py-2.5 text-sm text-muted border border-border rounded-xl hover:bg-white/5 transition-colors"
+                      className="flex-1 text-center py-2.5 text-sm text-muted border border-border rounded-xl hover-bg transition-colors"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Log in

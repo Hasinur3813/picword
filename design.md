@@ -151,3 +151,16 @@ remember::
 remember this is a vocab learnign platform.
 users can't generate vocab for now.
 and the vocab will be organized by category.
+
+next.js note...
+use best rendering methods best on the data. meanas if the data is static use static rendering. if the data is dynamic use dynamic rendering. and if the data is in between use incremental static regeneration.
+
+also use best caching methods.
+
+use server components and client components properly. use client components only when needed.
+
+UI note...
+use glassmorphism design. and use animations properly. use framer motion for animations. and use tailwind css for styling.
+
+important note...
+use theme properly. and maintain it from one place. use it properly everywhere. and maintain it properly.

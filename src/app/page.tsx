@@ -15,6 +15,36 @@ const STATS = [
   { label: "Visual Cards", value: "500+" },
 ];
 
+const WORD_OF_THE_DAY = {
+  word: "Ephemeral",
+  phonetic: "/ɪˈfem(ə)rəl/",
+  bengali: "ক্ষণস্থায়ী",
+  meaning: "Lasting for a very short time",
+  example: "The beauty of cherry blossoms is ephemeral, lasting only a few days each spring.",
+  synonyms: ["Fleeting", "Transient", "Momentary"],
+};
+
+const TESTIMONIALS = [
+  {
+    name: "Rafiul Islam",
+    role: "IELTS Candidate",
+    avatar: "🧑‍🎓",
+    quote: "The visual cards made abstract words finally click. I went from confusing 'affect' and 'effect' to using both confidently.",
+  },
+  {
+    name: "Nusrat Jahan",
+    role: "University Student",
+    avatar: "👩‍💻",
+    quote: "Categorized learning changed everything. I focus on Academic words before exams and Business words for internships.",
+  },
+  {
+    name: "Tanvir Ahmed",
+    role: "Software Engineer",
+    avatar: "👨‍💼",
+    quote: "Picword's Bengali translations paired with real examples helped me actually retain vocabulary instead of just memorizing lists.",
+  },
+];
+
 export default function Home() {
   return (
     <main className="flex-1 flex flex-col relative overflow-hidden">
@@ -79,10 +109,11 @@ export default function Home() {
             className="animate-fade-in-up"
             style={{ animationDelay: "0.35s" }}
           >
-            <a
-              href="#categories"
+            
+            <a  href="#categories"
               className="inline-flex items-center gap-2 h-12 px-8 rounded-full bg-primary text-white font-medium transition-all hover:bg-primary-light hover:scale-105 glow-effect"
             >
+            
               Explore Categories
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -98,6 +129,68 @@ export default function Home() {
                 <path d="m6 9 6 6 6-6" />
               </svg>
             </a>
+          </div>
+        </Container>
+      </section>
+
+      {/* ───── Word of the Day Section ───── */}
+      <section className="relative z-10 pb-24">
+        <Container size="lg">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-10 items-center glass glow-effect rounded-3xl p-8 sm:p-12 animate-fade-in-up">
+            {/* Left: label + intro */}
+            <div className="text-center lg:text-left">
+              <span className="inline-block px-4 py-1.5 text-xs font-medium tracking-widest uppercase text-accent-light rounded-full glass-sm mb-5">
+                Word of the Day
+              </span>
+              <h2
+                className="text-3xl sm:text-4xl font-bold mb-4"
+                style={{ fontFamily: "var(--font-space-grotesk)" }}
+              >
+                Learn something <span className="gradient-text-glow">new, daily</span>
+              </h2>
+              <p className="text-muted leading-relaxed max-w-sm mx-auto lg:mx-0">
+                Every day brings a fresh word with full context — definition,
+                Bengali meaning, real usage, and synonyms — so vocabulary
+                sticks, not just gets memorized.
+              </p>
+            </div>
+
+            {/* Right: word card */}
+            <div className="glass-sm rounded-2xl p-8 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 rounded-full blur-[80px]" />
+              <div className="relative">
+                <div className="flex items-baseline gap-3 flex-wrap mb-2">
+                  <h3
+                    className="text-3xl sm:text-4xl font-bold gradient-text"
+                    style={{ fontFamily: "var(--font-space-grotesk)" }}
+                  >
+                    {WORD_OF_THE_DAY.word}
+                  </h3>
+                  <span className="text-sm text-muted">{WORD_OF_THE_DAY.phonetic}</span>
+                </div>
+
+                <p className="text-lg text-accent-light font-medium mb-4">
+                  {WORD_OF_THE_DAY.bengali}
+                </p>
+
+                <p className="text-base mb-4">{WORD_OF_THE_DAY.meaning}</p>
+
+                <p className="text-sm text-muted italic leading-relaxed mb-5 border-l-2 border-primary/30 pl-4">
+                  "{WORD_OF_THE_DAY.example}"
+                </p>
+
+                <div className="flex items-center gap-2 flex-wrap">
+                  {WORD_OF_THE_DAY.synonyms.map((syn) => (
+                    <span
+                      key={syn}
+                      className="text-xs px-3 py-1 rounded-full glass-sm text-muted"
+                    >
+                      {syn}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </Container>
       </section>
@@ -226,6 +319,102 @@ export default function Home() {
           </div>
         </Container>
       </section>
+
+      {/* ───── Testimonials Section ───── */}
+      <section className="relative z-10 pb-24">
+        <Container size="xl">
+          <div className="text-center mb-12">
+            <h2
+              className="text-3xl sm:text-4xl font-bold mb-3"
+              style={{ fontFamily: "var(--font-space-grotesk)" }}
+            >
+              Loved by <span className="gradient-text-glow">Learners</span>
+            </h2>
+            <p className="text-muted max-w-md mx-auto">
+              Real progress from students, professionals, and exam candidates
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {TESTIMONIALS.map((t, i) => (
+              <div
+                key={t.name}
+                className="glass p-6 rounded-2xl animate-fade-in-up"
+                style={{ animationDelay: `${0.15 * i}s` }}
+              >
+                {/* Quote mark */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="text-primary/30 mb-3"
+                >
+                  <path
+                    d="M9.5 8C6.5 8 4 10.5 4 13.5S6.5 19 9.5 19c0 2-1.5 3-3.5 3v1c4 0 6-2.5 6-6.5V13c0-2.8-1.1-5-2.5-5zm10 0c-3 0-5.5 2.5-5.5 5.5S16.5 19 19.5 19c0 2-1.5 3-3.5 3v1c4 0 6-2.5 6-6.5V13c0-2.8-1.1-5-2.5-5z"
+                    fill="currentColor"
+                  />
+                </svg>
+
+                <p className="text-sm text-muted leading-relaxed mb-6">
+                  {t.quote}
+                </p>
+
+                <div className="flex items-center gap-3">
+                  <span className="text-3xl">{t.avatar}</span>
+                  <div>
+                    <p className="text-sm font-semibold">{t.name}</p>
+                    <p className="text-xs text-muted">{t.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ───── Closing CTA Banner ───── */}
+  {/* ───── Closing CTA Banner ───── */}
+<section className="relative z-10 pb-24">
+  <Container size="lg">
+    <div className="relative overflow-hidden rounded-3xl glass glow-effect text-center px-8 py-14 sm:py-16 animate-fade-in-up">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-primary/15 rounded-full blur-[100px] pointer-events-none" />
+      <div className="relative">
+        <h2
+          className="text-3xl sm:text-4xl font-bold mb-4"
+          style={{ fontFamily: "var(--font-space-grotesk)" }}
+        >
+          Ready to grow your <span className="gradient-text">vocabulary</span>?
+        </h2>
+        <p className="text-muted max-w-lg mx-auto mb-8">
+          Join learners mastering English one visual word card at a time.
+          No sign-up friction, just start exploring.
+        </p>
+        
+        <a  href="#categories"
+          className="inline-flex items-center gap-2 h-12 px-8 rounded-full bg-primary text-white font-medium transition-all hover:bg-primary-light hover:scale-105 glow-effect"
+        >
+          Start Learning Free
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </Container>
+</section>
     </main>
   );
 }
