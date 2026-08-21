@@ -110,11 +110,11 @@ export default function Home() {
             style={{ animationDelay: "0.35s" }}
           >
             
-            <a  href="#categories"
+            <a  href="/words"
               className="inline-flex items-center gap-2 h-12 px-8 rounded-full bg-primary text-white font-medium transition-all hover:bg-primary-light hover:scale-105 glow-effect"
             >
             
-              Explore Categories
+              Explore Words
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
@@ -126,7 +126,8 @@ export default function Home() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <path d="m6 9 6 6 6-6" />
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
               </svg>
             </a>
           </div>
@@ -392,7 +393,7 @@ export default function Home() {
           No sign-up friction, just start exploring.
         </p>
         
-        <a  href="#categories"
+        <a  href="/words"
           className="inline-flex items-center gap-2 h-12 px-8 rounded-full bg-primary text-white font-medium transition-all hover:bg-primary-light hover:scale-105 glow-effect"
         >
           Start Learning Free

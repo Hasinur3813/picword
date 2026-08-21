@@ -5,18 +5,7 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import type { IUser } from "@/types";
-
-// ── Mock categories (will come from API later) ──────────────────────────────
-const CATEGORIES = [
-  { name: "Daily Life", slug: "daily-life", icon: "🏠", wordCount: 45, description: "Essential words for everyday conversations" },
-  { name: "Academic", slug: "academic", icon: "🎓", wordCount: 62, description: "Words commonly used in academic writing" },
-  { name: "Business", slug: "business", icon: "💼", wordCount: 38, description: "Professional vocabulary for the workplace" },
-  { name: "Technology", slug: "technology", icon: "💻", wordCount: 51, description: "Modern tech and digital terminology" },
-  { name: "Emotions", slug: "emotions", icon: "💭", wordCount: 34, description: "Express feelings with precision" },
-  { name: "Nature", slug: "nature", icon: "🌿", wordCount: 29, description: "Words describing the natural world" },
-  { name: "Travel", slug: "travel", icon: "✈️", wordCount: 41, description: "Navigate the world with confidence" },
-  { name: "Health", slug: "health", icon: "🩺", wordCount: 36, description: "Medical and wellness terminology" },
-];
+import { CATEGORIES } from "@/data/categories";
 
 // ── Mock auth state (swap this with real auth later) ────────────────────────
 const MOCK_USER: IUser | null = null;
@@ -77,6 +66,13 @@ export default function Navbar() {
               className="px-4 py-2 text-sm text-muted hover:text-foreground transition-colors rounded-lg hover-bg"
             >
               Home
+            </Link>
+
+            <Link
+              href="/words"
+              className="px-4 py-2 text-sm text-muted hover:text-foreground transition-colors rounded-lg hover-bg"
+            >
+              Words
             </Link>
 
             {/* Categories with hover mega-menu */}
@@ -237,6 +233,14 @@ export default function Navbar() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Home
+              </Link>
+
+              <Link
+                href="/words"
+                className="px-4 py-3 text-sm text-muted hover:text-foreground hover-bg rounded-xl transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Words
               </Link>
 
               {/* Mobile categories accordion */}

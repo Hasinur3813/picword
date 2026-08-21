@@ -18,10 +18,15 @@ export interface ICategory {
 
 // --- Vocabulary Types ---
 
+/** Learning difficulty for progressive browsing */
+export type VocabDifficulty = "beginner" | "intermediate" | "advanced";
+
 /** Core vocabulary card data shape, mirrors the Mongoose schema */
 export interface IVocabulary {
   _id?: string;
   word: string;
+  /** IPA pronunciation, e.g. /ɪˈfemərəl/ */
+  phonetic?: string;
   description: string;
   englishMeaning: string;
   bengaliMeaning: string;
@@ -30,8 +35,23 @@ export interface IVocabulary {
   antonyms: string[];
   imageUrl: string;
   cloudinaryPublicId?: string;
+  /** Category slug (e.g. "daily-life") */
   category: string;
+  difficulty?: VocabDifficulty;
   createdAt: Date;
+}
+
+/** Browse-page sort options */
+export type VocabSortOption = "az" | "za" | "recent" | "difficulty";
+
+/** Active filters on the words browse page */
+export interface VocabFilters {
+  search: string;
+  categories: string[];
+  difficulty: VocabDifficulty | "all";
+  letter: string | "all";
+  savedOnly: boolean;
+  sort: VocabSortOption;
 }
 
 // --- API Types ---
