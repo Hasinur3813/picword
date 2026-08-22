@@ -45,9 +45,31 @@ const TESTIMONIALS = [
   },
 ];
 
+// Enable ISR revalidating every hour
+export const revalidate = 3600;
+
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Picword",
+    url: "https://picword.app",
+    description:
+      "Master English vocabulary visually through curated categories, Bengali definitions, AI mnemonics, and interactive flashcards.",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://picword.app/words?search={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+  };
+
   return (
     <main className="flex-1 flex flex-col relative overflow-hidden">
+      {/* Schema.org WebSite JSON-LD for Search Indexing */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Background ambient glow effects */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[128px]" />

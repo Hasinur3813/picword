@@ -1,25 +1,29 @@
-import type { ContainerSize, BaseComponentProps } from '@/types';
+import type { ReactNode } from "react";
 
-interface ContainerProps extends BaseComponentProps {
+export type ContainerSize = "sm" | "md" | "lg" | "xl" | "full";
+
+export interface ContainerProps {
+  children?: ReactNode;
+  className?: string;
   /** Max-width variant: sm (640px), md (768px), lg (1024px), xl (1280px), full (100%) */
   size?: ContainerSize;
   /** HTML element to render as */
-  as?: 'div' | 'section' | 'main' | 'article' | 'header' | 'footer';
+  as?: "div" | "section" | "main" | "article" | "header" | "footer";
 }
 
 const sizeClasses: Record<ContainerSize, string> = {
-  sm: 'max-w-screen-sm',
-  md: 'max-w-screen-md',
-  lg: 'max-w-screen-lg',
-  xl: 'max-w-screen-xl',
-  full: 'max-w-full',
+  sm: "max-w-screen-sm",
+  md: "max-w-screen-md",
+  lg: "max-w-screen-lg",
+  xl: "max-w-screen-xl",
+  full: "max-w-full",
 };
 
 export default function Container({
   children,
-  size = 'xl',
-  as: Element = 'div',
-  className = '',
+  size = "xl",
+  as: Element = "div",
+  className = "",
 }: ContainerProps) {
   return (
     <Element

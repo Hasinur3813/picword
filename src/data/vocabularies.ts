@@ -6,6 +6,7 @@ export const VOCABULARIES: IVocabulary[] = [
     _id: "1",
     word: "Ephemeral",
     phonetic: "/ɪˈfemərəl/",
+    partOfSpeech: "adjective",
     description: "Something that lasts only a brief moment before fading away.",
     englishMeaning: "Lasting for a very short time",
     bengaliMeaning: "ক্ষণস্থায়ী",
@@ -16,6 +17,23 @@ export const VOCABULARIES: IVocabulary[] = [
       "The beauty of cherry blossoms is ephemeral, lasting only a few days each spring.",
     exampleSentenceBengali:
       "চেরি ফুলের সৌন্দর্য ক্ষণস্থায়ী, যা প্রতি বসন্তে মাত্র কয়েক দিনের জন্য টিকে থাকে।",
+    exampleSentences: [
+      {
+        english: "The beauty of cherry blossoms is ephemeral, lasting only a few days each spring.",
+        bengali: "চেরি ফুলের সৌন্দর্য ক্ষণস্থায়ী, যা প্রতি বসন্তে মাত্র কয়েক দিনের জন্য টিকে থাকে।",
+        context: "daily",
+      },
+      {
+        english: "Fame in the digital age can be ephemeral if not backed by ongoing achievement.",
+        bengali: "ধারাবাহিক অর্জন না থাকলে ডিজিটাল যুগের খ্যাতি ক্ষণস্থায়ী হতে পারে।",
+        context: "academic",
+      },
+    ],
+    mnemonic: {
+      analogy: "Sounds like 'E-Feminine Floral' — like delicate spring flowers that bloom and vanish overnight.",
+      bengaliAnalogy: "ইফেমারাল (Ephemeral) মনে রাখুন 'একের পর এক মেঘের ভেলা' যা আকাশে কিছুক্ষণ ভেসে থেকেই মিলিয়ে যায়।",
+      visualPrompt: "A glowing cherry blossom petal dissolving softly into glowing stardust.",
+    },
     synonyms: ["Fleeting", "Transient", "Momentary"],
     antonyms: ["Permanent", "Enduring"],
     imageUrl:
@@ -28,6 +46,7 @@ export const VOCABULARIES: IVocabulary[] = [
     _id: "2",
     word: "Resilient",
     phonetic: "/rɪˈzɪliənt/",
+    partOfSpeech: "adjective",
     description: "Able to recover quickly from difficulty or bounce back stronger.",
     englishMeaning: "Able to withstand or recover quickly from adversity",
     bengaliMeaning: "সহনশীল / স্থিতিস্থাপক",
@@ -38,6 +57,23 @@ export const VOCABULARIES: IVocabulary[] = [
       "She remained resilient through every setback during her exam preparation.",
     exampleSentenceBengali:
       "পরীক্ষার প্রস্তুতিতে প্রতিটি বাধার মধ্যেও সে মানসিক শক্তিতে অবিচল ছিল।",
+    exampleSentences: [
+      {
+        english: "She remained resilient through every setback during her exam preparation.",
+        bengali: "পরীক্ষার প্রস্তুতিতে প্রতিটি বাধার মধ্যেও সে মানসিক শক্তিতে অবিচল ছিল।",
+        context: "academic",
+      },
+      {
+        english: "Resilient supply chains can quickly adapt to global market disruptions.",
+        bengali: "সহনশীল সাপ্লাই চেইন বৈশ্বিক বাজার বিপর্যয়ে দ্রুত মানিয়ে নিতে পারে।",
+        context: "business",
+      },
+    ],
+    mnemonic: {
+      analogy: "Think of a 'Rubber Silicon ring' that bends under immense pressure but bounces straight back.",
+      bengaliAnalogy: "রেজিলিয়েন্ট মনে রাখুন 'রি-সাইলেন্ট ট্রাই' দিয়ে — চুপচাপ কষ্ট সহ্য করে আবার দ্বিগুণ শক্তিতে ঘুরে দাঁড়ানো।",
+      visualPrompt: "A green bamboo shoot bending under heavy snow and springing upright as snow melts.",
+    },
     synonyms: ["Tough", "Durable", "Adaptive"],
     antonyms: ["Fragile", "Weak"],
     imageUrl:

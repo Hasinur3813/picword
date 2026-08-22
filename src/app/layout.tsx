@@ -17,7 +17,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Picword — Master Vocabulary with Visual Learning",
+  title: "Picword — Master English Vocabulary with Visual Learning",
   description:
     "Explore curated vocabulary organized by categories. Each word comes with definitions, Bengali translations, example sentences, synonyms, antonyms, and visual memory anchors.",
   keywords: [
@@ -29,12 +29,17 @@ export const metadata: Metadata = {
     "language learning",
     "education",
     "visual learning",
+    "IELTS preparation",
   ],
-  authors: [{ name: "Picword" }],
+  authors: [{ name: "Picword Team" }],
+  metadataBase: new URL("https://picword.app"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Picword — Master Vocabulary with Visual Learning",
     description:
-      "Explore curated vocabulary by category. Definitions, translations, visual anchors — everything you need to master new words.",
+      "Explore curated vocabulary by category. Definitions, Bengali translations, visual anchors — everything you need to master new words.",
     type: "website",
     locale: "en_US",
     siteName: "Picword",
@@ -43,18 +48,22 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Picword — Master Vocabulary with Visual Learning",
     description:
-      "Explore curated vocabulary by category. Definitions, translations, visual anchors — everything you need to master new words.",
+      "Explore curated vocabulary by category. Definitions, Bengali translations, visual anchors — everything you need to master new words.",
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en"
       className={`${inter.variable} ${spaceGrotesk.variable} h-full`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col antialiased selection:bg-primary/20 selection:text-primary">
         <ThemeProvider>
           <Navbar />
           {children}

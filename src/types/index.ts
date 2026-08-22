@@ -1,51 +1,18 @@
 // ============================================================================
-// Picword — Centralized Type Definitions
-// All TypeScript types are maintained here and imported via @/types
+// Picword — Centralized Shared Domain Type Definitions
+// Shared Domain Models ONLY (Imported via @/types)
+// Local component types must be co-located inside component files.
 // ============================================================================
 
-// --- Category Types ---
+import type { VocabDifficulty } from "./vocab";
 
-/** A vocabulary category (e.g. "Daily Life", "Academic", "Business") */
-export interface ICategory {
-  _id?: string;
-  name: string;
-  slug: string;
-  description: string;
-  icon?: string;
-  wordCount?: number;
-  createdAt: Date;
-}
+// --- Category Domain Types ---
+export * from "./category";
 
-// --- Vocabulary Types ---
+// --- Vocabulary Domain Types ---
+export * from "./vocab";
 
-/** Learning difficulty for progressive browsing */
-export type VocabDifficulty = "beginner" | "intermediate" | "advanced";
-
-/** Core vocabulary card data shape, mirrors the Mongoose schema */
-export interface IVocabulary {
-  _id?: string;
-  word: string;
-  /** IPA pronunciation, e.g. /ɪˈfemərəl/ */
-  phonetic?: string;
-  description: string;
-  englishMeaning: string;
-  bengaliMeaning: string;
-  /** Bangla translation of the English meaning */
-  englishMeaningBengali?: string;
-  /** Detailed educational explanation in Bangla to enhance learning */
-  bengaliDetails?: string;
-  exampleSentence: string;
-  /** Bangla translation of the example sentence */
-  exampleSentenceBengali?: string;
-  synonyms: string[];
-  antonyms: string[];
-  imageUrl: string;
-  cloudinaryPublicId?: string;
-  /** Category slug (e.g. "daily-life") */
-  category: string;
-  difficulty?: VocabDifficulty;
-  createdAt: Date;
-}
+// --- Browse Filter Types ---
 
 /** Browse-page sort options */
 export type VocabSortOption = "az" | "za" | "recent" | "difficulty";
@@ -58,9 +25,10 @@ export interface VocabFilters {
   letter: string | "all";
   savedOnly: boolean;
   sort: VocabSortOption;
+  mode: "browse" | "recall";
 }
 
-// --- API Types ---
+// --- API Domain Types ---
 
 /** Standardized API error response */
 export interface ApiError {
@@ -70,7 +38,7 @@ export interface ApiError {
 }
 
 /** Union type for all API responses */
-export type ApiResponse<T = IVocabulary> =
+export type ApiResponse<T> =
   | { success: true; data: T }
   | ApiError;
 
@@ -84,9 +52,9 @@ export interface PaginatedResponse<T> {
   hasMore: boolean;
 }
 
-// --- Auth Types ---
+// --- User & Auth Domain Types ---
 
-/** User object for auth state */
+/** User domain entity */
 export interface IUser {
   _id: string;
   name: string;
@@ -94,18 +62,7 @@ export interface IUser {
   avatar?: string;
 }
 
-// --- Theme Types ---
+// --- Theme Domain Types ---
 
 /** Supported theme modes */
-export type Theme = 'dark' | 'light';
-
-// --- UI Types ---
-
-/** Container component size variants */
-export type ContainerSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
-
-/** Common component props with optional className */
-export interface BaseComponentProps {
-  className?: string;
-  children?: React.ReactNode;
-}
+export type Theme = "dark" | "light";

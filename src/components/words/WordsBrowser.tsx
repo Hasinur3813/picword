@@ -1,15 +1,15 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Filter, Sparkles } from "lucide-react";
+import { Filter, Sparkles, BookOpen, Layers } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Container from "@/components/ui/Container";
 import FilterSidebar from "@/components/words/FilterSidebar";
-import VocabCard from "@/components/words/VocabCard";
 import { VOCABULARIES } from "@/data/vocabularies";
 import { CATEGORIES } from "@/data/categories";
 import { useSavedWords } from "@/hooks/useSavedWords";
 import type { VocabFilters } from "@/types";
+import VocabCard from "@/components/VocabCard";
 
 const DEFAULT_FILTERS: VocabFilters = {
   search: "",
@@ -18,6 +18,7 @@ const DEFAULT_FILTERS: VocabFilters = {
   letter: "all",
   savedOnly: false,
   sort: "az",
+  mode: "browse",
 };
 
 const DIFFICULTY_ORDER = { beginner: 0, intermediate: 1, advanced: 2 } as const;
@@ -77,10 +78,11 @@ function filterVocabularies(
     switch (filters.sort) {
       case "za":
         return b.word.localeCompare(a.word);
-      case "recent":
-        return (
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        );
+      case "recent": {
+        const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+        const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+        return timeB - timeA;
+      }
       case "difficulty": {
         const da = a.difficulty ? DIFFICULTY_ORDER[a.difficulty] : 99;
         const db = b.difficulty ? DIFFICULTY_ORDER[b.difficulty] : 99;
@@ -192,6 +194,36 @@ export default function WordsBrowser() {
                 of {VOCABULARIES.length}
               </p>
 
+              {/* Mode Switcher Pill */}
+              <div className="flex items-center gap-1 p-1 rounded-xl bg-elevated border border-border shadow-sm">
+                <button
+                  type="button"
+                  onClick={() => setFilters((f) => ({ ...f, mode: "browse" }))}
+                  className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold transition-all focus-ring ${
+                    filters.mode === "browse"
+                      ? "bg-primary text-white shadow-sm"
+                      : "text-muted hover:text-foreground"
+                  }`}
+                  title="Browse Mode: View all word details & meanings upfront"
+                >
+                  <BookOpen size={13} />
+                  <span>Browse</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFilters((f) => ({ ...f, mode: "recall" }))}
+                  className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold transition-all focus-ring ${
+                    filters.mode === "recall"
+                      ? "bg-primary text-white shadow-sm"
+                      : "text-muted hover:text-foreground"
+                  }`}
+                  title="Active Recall: Hide meanings behind tap to test your memory"
+                >
+                  <Layers size={13} />
+                  <span>Recall Mode</span>
+                </button>
+              </div>
+
               {/* Active chips */}
               <div className="flex flex-wrap gap-1.5 ml-auto">
                 {filters.savedOnly && (
@@ -244,7 +276,8 @@ export default function WordsBrowser() {
                         saved={isSaved(id)}
                         onToggleSave={toggleSave}
                         index={i}
-                        mode="browse"
+                        mode={filters.mode}
+                        onSrsRate={() => {}}
                       />
                     );
                   })}

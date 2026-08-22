@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, Bookmark, RotateCcw, X } from "lucide-react";
+import { Search, Bookmark, RotateCcw, X, BookOpen, Layers } from "lucide-react";
 import { CATEGORIES } from "@/data/categories";
 import type { VocabDifficulty, VocabFilters, VocabSortOption } from "@/types";
 
@@ -118,6 +118,44 @@ export default function FilterSidebar({
       </label>
 
       <div className="flex-1 min-h-0 overflow-y-auto space-y-6 pr-2 -mr-1.5 custom-scrollbar">
+        {/* Study Mode */}
+        <section>
+          <h3
+            className="text-xs font-semibold uppercase tracking-wider text-muted mb-2.5"
+            style={{ fontFamily: "var(--font-space-grotesk)" }}
+          >
+            Study Mode
+          </h3>
+          <div className="grid grid-cols-2 gap-1.5 p-1 rounded-xl bg-elevated/80 border border-border">
+            <button
+              type="button"
+              onClick={() => onChange({ ...filters, mode: "browse" })}
+              className={`flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg text-xs font-semibold transition-all focus-ring ${
+                filters.mode === "browse"
+                  ? "bg-primary text-white shadow-sm"
+                  : "text-muted hover:text-foreground"
+              }`}
+              title="Browse Mode: View all word details & meanings upfront"
+            >
+              <BookOpen size={13} />
+              <span>Browse</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onChange({ ...filters, mode: "recall" })}
+              className={`flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg text-xs font-semibold transition-all focus-ring ${
+                filters.mode === "recall"
+                  ? "bg-primary text-white shadow-sm"
+                  : "text-muted hover:text-foreground"
+              }`}
+              title="Active Recall: Hide meanings behind tap to test your memory"
+            >
+              <Layers size={13} />
+              <span>Recall</span>
+            </button>
+          </div>
+        </section>
+
         {/* Saved */}
         <section>
           <button
