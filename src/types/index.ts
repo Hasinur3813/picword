@@ -52,13 +52,19 @@ export interface PaginatedResponse<T> {
   hasMore: boolean;
 }
 
+// --- Admin Domain Types ---
+export * from "./admin";
+
 // --- User & Auth Domain Types ---
+
+export type UserRole = "user" | "admin";
 
 /** User domain entity */
 export interface IUser {
   _id: string;
   name: string;
   email: string;
+  role: UserRole;
   avatar?: string;
 }
 
