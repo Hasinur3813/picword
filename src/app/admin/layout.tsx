@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import AdminHeader from "@/components/admin/AdminHeader";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
 export const metadata: Metadata = {
   title: "Admin Control Center | Picword",
@@ -13,17 +14,19 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex bg-background text-foreground relative z-20">
-      {/* Admin Dedicated Navigation Sidebar */}
-      <AdminSidebar />
+    <ProtectedRoute requiredRole="admin">
+      <div className="min-h-screen flex bg-background text-foreground relative z-20">
+        {/* Admin Dedicated Navigation Sidebar */}
+        <AdminSidebar />
 
-      {/* Main Content Workspace */}
-      <div className="flex-1 flex flex-col min-w-0">
-        <AdminHeader />
-        <main className="flex-1 p-6 sm:p-8 overflow-y-auto">
-          {children}
-        </main>
+        {/* Main Content Workspace */}
+        <div className="flex-1 flex flex-col min-w-0">
+          <AdminHeader />
+          <main className="flex-1 p-6 sm:p-8 overflow-y-auto">
+            {children}
+          </main>
+        </div>
       </div>
-    </div>
+    </ProtectedRoute>
   );
 }

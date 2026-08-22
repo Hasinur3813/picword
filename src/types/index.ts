@@ -56,17 +56,7 @@ export interface PaginatedResponse<T> {
 export * from "./admin";
 
 // --- User & Auth Domain Types ---
-
-export type UserRole = "user" | "admin";
-
-/** User domain entity */
-export interface IUser {
-  _id: string;
-  name: string;
-  email: string;
-  role: UserRole;
-  avatar?: string;
-}
+export * from "./auth";
 
 // --- Theme Domain Types ---
 

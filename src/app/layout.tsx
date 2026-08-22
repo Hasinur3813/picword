@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import StoreProvider from "@/components/providers/StoreProvider";
+import ToastProvider from "@/components/providers/ToastProvider";
 import Navbar from "@/components/layout/Navbar";
 import "./globals.css";
 
@@ -64,15 +66,19 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col antialiased selection:bg-primary/20 selection:text-primary relative bg-background text-foreground">
-        <ThemeProvider>
-          {/* Ambient Celestial Night Sky & Starfield Backdrop */}
-          <div className="night-atmosphere night-stars" aria-hidden="true" />
-          <div className="relative z-10 flex min-h-full flex-col flex-1">
-            <Navbar />
-            {children}
-          </div>
-        </ThemeProvider>
+        <StoreProvider>
+          <ThemeProvider>
+            {/* Ambient Celestial Night Sky & Starfield Backdrop */}
+            <div className="night-atmosphere night-stars" aria-hidden="true" />
+            <div className="relative z-10 flex min-h-full flex-col flex-1">
+              <Navbar />
+              {children}
+            </div>
+            <ToastProvider />
+          </ThemeProvider>
+        </StoreProvider>
       </body>
     </html>
   );
 }
+

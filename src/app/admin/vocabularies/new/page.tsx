@@ -273,6 +273,7 @@ export default function AddVocabularyPage() {
                     setForm({
                       ...form,
                       mnemonic: {
+                        analogy: form.mnemonic?.analogy ?? "",
                         ...form.mnemonic,
                         bengaliAnalogy: e.target.value,
                       },

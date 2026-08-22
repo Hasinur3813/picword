@@ -119,7 +119,9 @@ export default function AdminVocabulariesPage() {
                       <div className="flex items-center gap-2">
                         <span>{word.word}</span>
                         {word.mnemonic?.bengaliAnalogy && (
-                          <Sparkles size={13} className="text-amber-400" title="Has AI Mnemonic" />
+                          <span title="Has AI Mnemonic" className="inline-flex">
+                            <Sparkles size={13} className="text-amber-400" />
+                          </span>
                         )}
                       </div>
                       <span className="block text-[11px] font-normal text-muted">
