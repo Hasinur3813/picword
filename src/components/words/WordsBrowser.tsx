@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Filter, Sparkles, BookOpen, Layers } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Container from "@/components/ui/Container";
@@ -9,7 +9,7 @@ import { VOCABULARIES } from "@/data/vocabularies";
 import { CATEGORIES } from "@/data/categories";
 import { useSavedWords } from "@/hooks/useSavedWords";
 import type { VocabFilters } from "@/types";
-import VocabCard from "@/components/VocabCard";
+import VocabCard, { VocabCardSkeleton } from "@/components/VocabCard";
 
 const DEFAULT_FILTERS: VocabFilters = {
   search: "",
@@ -101,7 +101,14 @@ function filterVocabularies(
 export default function WordsBrowser() {
   const [filters, setFilters] = useState<VocabFilters>(DEFAULT_FILTERS);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { saved, savedCount, isSaved, toggleSave } = useSavedWords();
+
+  // Smooth skeleton loading on initial mount and category switches
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 350);
+    return () => clearTimeout(timer);
+  }, [filters.categories, filters.difficulty]);
 
   const results = useMemo(
     () => filterVocabularies(filters, saved),
@@ -261,33 +268,40 @@ export default function WordsBrowser() {
             </div>
 
             {/* Grid */}
-            <AnimatePresence mode="popLayout">
-              {results.length > 0 ? (
-                <motion.div
-                  layout
-                  className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5"
-                >
-                  {results.map((vocab, i) => {
-                    const id = vocab._id ?? vocab.word;
-                    return (
-                      <VocabCard
-                        key={id}
-                        vocab={vocab}
-                        saved={isSaved(id)}
-                        onToggleSave={toggleSave}
-                        index={i}
-                        mode={filters.mode}
-                        onSrsRate={() => {}}
-                      />
-                    );
-                  })}
-                </motion.div>
-              ) : (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="glass rounded-2xl px-8 py-16 text-center"
-                >
+            {isLoading ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <VocabCardSkeleton key={i} index={i} />
+                ))}
+              </div>
+            ) : (
+              <AnimatePresence mode="popLayout">
+                {results.length > 0 ? (
+                  <motion.div
+                    layout
+                    className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5"
+                  >
+                    {results.map((vocab, i) => {
+                      const id = vocab._id ?? vocab.word;
+                      return (
+                        <VocabCard
+                          key={id}
+                          vocab={vocab}
+                          saved={isSaved(id)}
+                          onToggleSave={toggleSave}
+                          index={i}
+                          mode={filters.mode}
+                          onSrsRate={() => {}}
+                        />
+                      );
+                    })}
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="glass rounded-2xl px-8 py-16 text-center"
+                  >
                   <p
                     className="text-xl font-semibold mb-2"
                     style={{ fontFamily: "var(--font-space-grotesk)" }}
@@ -308,6 +322,7 @@ export default function WordsBrowser() {
                 </motion.div>
               )}
             </AnimatePresence>
+            )}
           </div>
         </div>
       </Container>

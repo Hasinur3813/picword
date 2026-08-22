@@ -63,10 +63,14 @@ export default function RootLayout({
       className={`${inter.variable} ${spaceGrotesk.variable} h-full`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col antialiased selection:bg-primary/20 selection:text-primary">
+      <body className="min-h-full flex flex-col antialiased selection:bg-primary/20 selection:text-primary relative bg-background text-foreground">
         <ThemeProvider>
-          <Navbar />
-          {children}
+          {/* Ambient Celestial Night Sky & Starfield Backdrop */}
+          <div className="night-atmosphere night-stars" aria-hidden="true" />
+          <div className="relative z-10 flex min-h-full flex-col flex-1">
+            <Navbar />
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>

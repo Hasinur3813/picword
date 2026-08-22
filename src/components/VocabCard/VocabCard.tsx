@@ -396,3 +396,46 @@ export default function VocabCard({
     </>
   );
 }
+
+export function VocabCardSkeleton({ index = 0 }: { index?: number }) {
+  return (
+    <div
+      className="relative flex flex-col overflow-hidden rounded-2xl glass glow-effect border border-border/50 bg-elevated/40 animate-pulse"
+      style={{ animationDelay: `${index * 0.08}s` }}
+    >
+      {/* Front Image Area Skeleton */}
+      <div className="relative aspect-[4/3] bg-surface/80 overflow-hidden flex flex-col justify-between p-4">
+        {/* Top bar skeletons */}
+        <div className="flex items-center justify-between">
+          <div className="h-6 w-20 rounded-full bg-white/10" />
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-white/10" />
+            <div className="w-8 h-8 rounded-full bg-white/10" />
+          </div>
+        </div>
+
+        {/* Shimmer gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent pointer-events-none" />
+
+        {/* Bottom Title & Meaning Skeletons */}
+        <div className="relative z-10 space-y-2">
+          <div className="h-7 w-36 rounded-lg bg-white/15" />
+          <div className="h-4 w-24 rounded-md bg-cyan-400/20" />
+        </div>
+      </div>
+
+      {/* Card Body Skeleton */}
+      <div className="flex flex-col gap-3 p-4 pt-3 bg-surface/30">
+        <div className="space-y-1.5">
+          <div className="h-4 w-full rounded bg-white/10" />
+          <div className="h-3.5 w-3/4 rounded bg-white/5" />
+        </div>
+
+        <div className="flex items-center justify-between pt-1">
+          <div className="h-5 w-16 rounded-md bg-white/10" />
+          <div className="h-4 w-20 rounded bg-primary/20" />
+        </div>
+      </div>
+    </div>
+  );
+}
