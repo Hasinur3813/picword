@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import WordsBrowser from "@/components/words/WordsBrowser";
+import Footer from "@/components/layout/Footer";
 import { VOCABULARIES } from "@/data/vocabularies";
 
 // Enable Incremental Static Regeneration (ISR) revalidating every 30 minutes
@@ -55,6 +56,7 @@ export default function WordsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <WordsBrowser />
+      <Footer />
     </main>
   );
 }
