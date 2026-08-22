@@ -30,7 +30,13 @@ export interface IVocabulary {
   description: string;
   englishMeaning: string;
   bengaliMeaning: string;
+  /** Bangla translation of the English meaning */
+  englishMeaningBengali?: string;
+  /** Detailed educational explanation in Bangla to enhance learning */
+  bengaliDetails?: string;
   exampleSentence: string;
+  /** Bangla translation of the example sentence */
+  exampleSentenceBengali?: string;
   synonyms: string[];
   antonyms: string[];
   imageUrl: string;

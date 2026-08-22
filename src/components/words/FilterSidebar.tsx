@@ -62,9 +62,9 @@ export default function FilterSidebar({
   };
 
   const panel = (
-    <aside className="flex flex-col h-full">
+    <div className="flex flex-col h-full min-h-0">
       {/* Header */}
-      <div className="flex items-start justify-between gap-3 mb-5">
+      <div className="flex items-start justify-between gap-3 mb-4 shrink-0">
         <div>
           <h2
             className="text-lg font-semibold tracking-tight"
@@ -102,7 +102,7 @@ export default function FilterSidebar({
       </div>
 
       {/* Search */}
-      <label className="relative block mb-6">
+      <label className="relative block mb-4 shrink-0">
         <span className="sr-only">Search words</span>
         <Search
           size={16}
@@ -117,7 +117,7 @@ export default function FilterSidebar({
         />
       </label>
 
-      <div className="flex-1 overflow-y-auto space-y-7 pr-1 -mr-1">
+      <div className="flex-1 min-h-0 overflow-y-auto space-y-6 pr-2 -mr-1.5 custom-scrollbar">
         {/* Saved */}
         <section>
           <button
@@ -302,18 +302,18 @@ export default function FilterSidebar({
           </div>
         </section>
       </div>
-    </aside>
+    </div>
   );
 
   /* Desktop always visible; mobile as overlay drawer */
   return (
     <>
-      {/* Desktop */}
-      <div className="hidden lg:block w-[280px] shrink-0">
-        <div className="sticky top-24 glass rounded-2xl p-5 max-h-[calc(100dvh-7rem)] overflow-hidden flex flex-col">
+      {/* Desktop Sticky Sidebar */}
+      <aside className="hidden lg:block w-[285px] shrink-0 sticky top-24 self-start z-20">
+        <div className="glass rounded-2xl p-5 max-h-[calc(100dvh-7.5rem)] flex flex-col min-h-0 shadow-lg">
           {panel}
         </div>
-      </div>
+      </aside>
 
       {/* Mobile overlay */}
       <div

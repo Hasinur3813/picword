@@ -53,8 +53,8 @@ export default function PronounceButton({
       disabled={!supported}
       className={`inline-flex items-center justify-center rounded-full transition-all focus-ring ${pad} ${
         speaking
-          ? "bg-accent/25 text-accent-light animate-pulse"
-          : "glass-sm text-white/90 hover:bg-accent/20 hover:text-accent-light"
+          ? "bg-cyan-500/30 text-cyan-200 border border-cyan-400/40 animate-pulse shadow-sm"
+          : "bg-black/40 text-white backdrop-blur-md border border-white/15 hover:bg-primary/50 hover:text-white shadow-sm"
       } ${!supported ? "opacity-40 cursor-not-allowed" : ""} ${className}`}
       aria-label={
         speaking ? `Stop pronunciation of ${word}` : `Pronounce ${word}`

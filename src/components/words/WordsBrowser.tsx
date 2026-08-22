@@ -58,8 +58,12 @@ function filterVocabularies(
       const haystack = [
         v.word,
         v.bengaliMeaning,
+        v.englishMeaningBengali ?? "",
+        v.bengaliDetails ?? "",
         v.description,
         v.englishMeaning,
+        v.exampleSentence,
+        v.exampleSentenceBengali ?? "",
       ]
         .join(" ")
         .toLowerCase();
@@ -240,6 +244,7 @@ export default function WordsBrowser() {
                         saved={isSaved(id)}
                         onToggleSave={toggleSave}
                         index={i}
+                        mode="browse"
                       />
                     );
                   })}
